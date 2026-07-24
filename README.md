@@ -38,4 +38,3 @@ permissions:
   issues: write
 ```
 
-See the [Use Action](./.github/workflows/use-action.yaml) workflow for a working example of this, that opens an issue in this repository.
