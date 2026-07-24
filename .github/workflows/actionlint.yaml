@@ -1,0 +1,49 @@
+# Copyright 2026 Chainguard, Inc.
+# Copyright 2026 StepSecurity.
+# SPDX-License-Identifier: Apache-2.0
+
+name: Action Lint
+on:
+  pull_request:
+    branches: ['main']
+    paths:
+      - '.github/workflows/**'
+      - '.github/actions/**'
+
+  push:
+    branches: ['main']
+    paths:
+      - '.github/workflows/**'
+      - '.github/actions/**'
+
+permissions: {}
+
+jobs:
+  action-lint:
+    permissions:
+      contents: read # Clone the repository
+    name: Action lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
+      - name: Check out code
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Find yamls
+        id: get_yamls
+        run: |
+          set -ex
+          mapfile -t yamls < <(find .github/workflows -name "*.y*ml" | grep -v dependabot.)
+          echo "files=${yamls[*]}" >> "${GITHUB_OUTPUT}"
+
+      - name: Action lint
+        uses: step-security/action-actionlint@v1
+        env:
+          SHELLCHECK_OPTS: "--exclude=SC2129"
+        with:
+          actionlint_flags: ${{ steps.get_yamls.outputs.files }}
