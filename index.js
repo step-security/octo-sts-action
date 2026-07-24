@@ -172,4 +172,4 @@ if (require.main === module) {
 }
 
 // Export for testing
-module.exports = { parseJwtClaims };
+module.exports = { parseJwtClaims, validateSubscription };

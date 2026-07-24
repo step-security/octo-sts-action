@@ -1,4 +1,4 @@
-import { validateSubscription } from ".";
+const { validateSubscription } = require(".");
 
 const tok = process.env.STATE_token;
 

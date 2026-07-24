@@ -178,7 +178,7 @@ if (require.main === require.cache[eval('__filename')]) {
 }
 
 // Export for testing
-module.exports = { parseJwtClaims };
+module.exports = { parseJwtClaims, validateSubscription };
 
 
 /***/ }),
