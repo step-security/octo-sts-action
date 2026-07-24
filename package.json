@@ -1,0 +1,27 @@
+{
+  "name": "octo-sts",
+  "version": "1.1.1",
+  "description": "This action federates the GitHub Actions identity token for a Github App token",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build:index": "ncc build index.js -o dist",
+    "build:post": "ncc build post.js -o dist/post",
+    "build": "npm run build:index && npm run build:post"
+  },
+  "keywords": [
+    "GitHub",
+    "Actions",
+    "Step Security Maintained Action"
+  ],
+  "author": "step-security",
+  "license": "Apache 2.0",
+  "devDependencies": {
+    "@vercel/ncc": "^0.44.1",
+    "jest": "^29.7.0"
+  },
+  "dependencies": {
+    "@actions/core": "^2.0.1",
+    "axios": "^1.18.1"
+  }
+}
